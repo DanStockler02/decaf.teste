@@ -24,8 +24,10 @@ WS_ : (' ' | '\n' ) -> skip;
 
 SL_COMMENT : '//' (~'\n')* '\n' -> skip;
 
-CHAR : '\'' (ESC|~'\'') '\'';
+CHAR : '\'' (ESC|ASCII) '\'';
 STRING : '"' (ESC|~'"')* '"';
 
 fragment
-ESC :  '\\' ('n'|'"');
+ESC :  '\\' ('n'|'t'|'\\'|'"');
+fragment
+ASCII : [a-zA-Z0-9 !#-&(-/:-@^-`{-~];
