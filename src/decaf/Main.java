@@ -31,6 +31,9 @@ class Main {
 
 		        			switch (token.getType())
 		        			{
+							case DecafLexer.BOOLN:
+                        		type = " BOOLEANLITERAL";
+								break;
 		        			case DecafLexer.ID:
 		        				type = " IDENTIFIER";
 								break;
@@ -43,9 +46,11 @@ class Main {
 							case DecafLexer.NUMBER:
                             	type = " INTLITERAL";
 								break;
-								case DecafLexer.HEXA:
-                            	type = " INTLITERAL";
+							case DecafLexer.HEXA:
+                        		type = " INTLITERAL";
 								break;
+							
+
 							}
 		        			System.out.println (token.getLine() + type + " " + text);
 		        		}

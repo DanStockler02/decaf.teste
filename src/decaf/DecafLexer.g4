@@ -18,13 +18,10 @@ IF : 'if';
 BL : 'boolean';
 CLLT : 'callout';
 EL : 'else';
-FLS : 'false';
 INT : 'int';
 RTN : 'return';
-TR : 'true';
 VD : 'void';
 FR : 'for';
-FPR : 'forpar';
 BRK : 'break';
 CNT : 'continue';
 CLSS : 'class';
@@ -54,6 +51,7 @@ MENORIG: '<=';
 INCREMENTO: '+=';
 DECREMENTO:'-=';
 ATRIBUICAO:'=';
+BOOLN : (BOLN);
 HEXA : '0x'('0'..'9'|'a'..'f'|'A'..'F')+;
 
 
@@ -68,9 +66,11 @@ STRING : '\"' (ESC|ASCII|'\\'|'\"'|'\\\'')* '\"';
 NUMBER : (NUM)+;
 OPR : (OPERA);
 
+
 fragment ESC :  '\\' ('n'|'t'|'\\'|'"');
 fragment ASCII : [a-zA-Z0-9 !#-&(-/:-@^-`{-~];
 fragment ALPHA : ('a'..'z'|'A'..'Z');
 fragment NUM : ('0'..'9');
 fragment OPERA : ('+'|'-'|'*'|'<'|'<='|'!='|'&&');
+fragment BOLN : ('true'|'false');
 
