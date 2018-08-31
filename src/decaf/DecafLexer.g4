@@ -14,9 +14,6 @@ tokens
   TK_class
 }
 
-LCURLY : '{';
-RCURLY : '}';
-
 IF : 'if';
 BL : 'boolean';
 CLLT : 'callout';
@@ -31,6 +28,34 @@ FPR : 'forpar';
 BRK : 'break';
 CNT : 'continue';
 CLSS : 'class';
+LCURLY : '{';
+RCURLY : '}';
+LPARENT:'(';
+RPARENT:')';
+LBRACKET:'[';
+RBRACKET:']';
+PONTOVIR:';';
+VIRGULA :',';
+MULT:'*';
+DIV:'/';
+SUB: '-';
+SUM: '+';
+EXP:'^';
+REST:'%';
+EXCL:'!';
+AND: '&&';
+OR: '||';
+IGUALDADE:'==';
+DIFERENTE:'!=';
+MAIOR: '>';
+MENOR: '<';
+MAIORIG:'>=';
+MENORIG: '<=';
+INCREMENTO: '+=';
+DECREMENTO:'-=';
+ATRIBUICAO:'=';
+HEXA : '0x'('0'..'9'|'a'..'f'|'A'..'F')+;
+
 
 ID  : ('_'|ALPHA)(ALPHA|NUM|'_')*;
 
