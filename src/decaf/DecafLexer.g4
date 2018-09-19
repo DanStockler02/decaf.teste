@@ -14,6 +14,7 @@ tokens
   TK_class
 }
 
+PROGR: 'Program';
 IF : 'if';
 BL : 'boolean';
 CLLT : 'callout';
@@ -52,6 +53,7 @@ INCREMENTO: '+=';
 DECREMENTO:'-=';
 ATRIBUICAO:'=';
 BOOLN : (BOLN);
+
 HEXA : '0x'('0'..'9'|'a'..'f'|'A'..'F')+;
 
 
@@ -73,4 +75,3 @@ fragment ALPHA : ('a'..'z'|'A'..'Z');
 fragment NUM : ('0'..'9');
 fragment OPERA : ('+'|'-'|'*'|'<'|'<='|'!='|'&&');
 fragment BOLN : ('true'|'false');
-

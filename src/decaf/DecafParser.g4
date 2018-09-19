@@ -10,61 +10,72 @@ options
   tokenVocab=DecafLexer;
 }
 
-program: CLSS ID LCURLY field_decl* method_decl* RCURLY;
+program: CLSS PROGR LCURLY field_decl* method_decl* RCURLY;
 
-field_decl: (LCURLY type ID | type ID LBRACKET int_litaral RBRACKET RCURLY)* PONTOVIR;
+field_decl: type id (VIRGULA type id)* PONTOVIR
+| type id LBRACKET int_literal RBRACKET (VIRGULA type id VIRGULA LBRACKET int_literal RBRACKET)* PONTOVIR;
 
-method_decl: {type | VD} ID LPARENT (type ID(VIRGULA type ID)*)? RPARENT block;
+method_decl: (type | VD)  id LPARENT (type id(VIRGULA type id)* )? RPARENT block;
 
 block: LCURLY var_decl* statement* RCURLY;
 
-var_decl: (type ID)* PONTOVIR;
+var_decl: (type id)* PONTOVIR;
 
-type: (INT | BL);
+type: INT | BL;
 
-statement: (location assing_op expr PONTOVIR | method_call PONTOVIR | IF (expr) block [ EL block ] | FR ID ATRIBUICAO expr PONTOVIR expr  block | RTN [expr] PONTOVIR | BRK PONTOVIR | CNT | block;
+statement: location assign_op expr PONTOVIR | method_call PONTOVIR | IF LPARENT expr RPARENT block (EL block)?  
+| FR ID ATRIBUICAO expr VIRGULA expr block 
+| RTN expr? PONTOVIR 
+| BRK PONTOVIR 
+| CNT PONTOVIR 
+| block;
 
-assing_op: ATRIBUICAO | INCREMENTO | DECREMENTO;
+assign_op: ATRIBUICAO | INCREMENTO | DECREMENTO;
 
-method_call: method_name LPARENT [(expr)*] RPARENT | CLLT LPARENT string_literal [, (callout_arg)* ,] RPARENT;
+method_call: method_name LPARENT (expr (VIRGULA expr)*)? RPARENT 
+| CLLT LPARENT string_literal (VIRGULA callout_arg (VIRGULA callout_arg)*)? RPARENT;
 
 method_name: ID;
 
-location: ID | ID LBRACKET expr RBRACKET;
+location: id | id LBRACKET expr RBRACKET;
 
-expr: location | method_call | literal | expr bin_op expr | SUB expr | EXCL expr | LPARENT expr RBRACKET;
+expr: location 
+| method_call 
+| literal
+| expr bin_op expr 
+| SUB expr 
+| EXCL expr 
+| LPARENT expr RPARENT;
 
 callout_arg: expr | string_literal;
 
 bin_op: arith_op | rel_op |  eq_op | cond_op;
 
-arith_op: SUM|SUB|MULT|REST;
+arith_op: SUM|SUB|MULT|REST|DIV;
 
-rel_op: MENOR|MAIOR|MEROIG|MAIORIG;
+rel_op: MENOR|MAIOR|MENORIG|MAIORIG;
 
 eq_op: IGUALDADE|DIFERENTE;
 
 cond_op: AND| OR;
 
-literal: int_litaral | char_literal | bool_literal;
+literal: int_literal | char_literal | bool_literal;
 
-id: ID alpha_num*;
+id: ID;
 
-alpha_num: ALPHA|NUM;
+alpha_num: ALP | NUMBER;
 
-hex_digit: NUM | a | b | c | d | e | f | A | B | C | D | E | F;
+int_literal: decimal_literal | hex_literal;
 
-int_litaral: decimal_literal | hex_literal;
+decimal_literal: NUMBER | (NUMBER)+;
 
-decimal_literal: NUM | (NUM)*;
+hex_literal: HEXA | (HEXA)+;
 
-hex_literal: HEXA | (HEXA)*;
+bool_literal: BOL;
 
-bool_literal: BOLN;
+char_literal: CHAR;
 
-char_literal: '(CHAR)*';
-
-string_literal: "(CHAR)*";
+string_literal: STRING;
 
 
 
