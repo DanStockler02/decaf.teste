@@ -12,14 +12,18 @@ options
 
 program: CLSS PROGR LCURLY field_decl* method_decl* RCURLY;
 
-field_decl: type id (VIRGULA type id)* PONTOVIR
-| type id LBRACKET int_literal RBRACKET (VIRGULA type id VIRGULA LBRACKET int_literal RBRACKET)* PONTOVIR;
+ra: type ID;
 
-method_decl: (type | VD)  id LPARENT (type id(VIRGULA type id)* )? RPARENT block;
+field_decl: type ID (VIRGULA ra)* PONTOVIR
+| type ID LBRACKET int_literal RBRACKET (VIRGULA ra VIRGULA LBRACKET int_literal RBRACKET)* PONTOVIR;
+
+method_decl: (type | VD)  ID LPARENT (ra (VIRGULA ra )* )? RPARENT block;
 
 block: LCURLY var_decl* statement* RCURLY;
 
-var_decl: (type id)* PONTOVIR;
+var_decl: type ID(vir)* PONTOVIR;
+
+vir: VIRGULA ID;
 
 type: INT | BL;
 
@@ -37,7 +41,7 @@ method_call: method_name LPARENT (expr (VIRGULA expr)*)? RPARENT
 
 method_name: ID;
 
-location: id | id LBRACKET expr RBRACKET;
+location: ID | ID LBRACKET expr RBRACKET;
 
 expr: location 
 | method_call 
@@ -61,9 +65,6 @@ cond_op: AND| OR;
 
 literal: int_literal | char_literal | bool_literal;
 
-id: ID;
-
-alpha_num: ALP | NUMBER;
 
 int_literal: decimal_literal | hex_literal;
 
@@ -71,20 +72,8 @@ decimal_literal: NUMBER | (NUMBER)+;
 
 hex_literal: HEXA | (HEXA)+;
 
-bool_literal: BOL;
+bool_literal: BL;
 
 char_literal: CHAR;
 
 string_literal: STRING;
-
-
-
-
-
-
-
-
-
-
-
-
