@@ -17,7 +17,7 @@ ra: type ID;
 field_decl: type ID (VIRGULA ra)* PONTOVIR
 | type ID LBRACKET int_literal RBRACKET (VIRGULA ra VIRGULA LBRACKET int_literal RBRACKET)* PONTOVIR;
 
-method_decl: (type | VD)  ID LPARENT (ra (VIRGULA ra )* )? RPARENT block;
+method_decl: (type | VOID)  ID LPARENT (ra (VIRGULA ra )* )? RPARENT block;
 
 block: LCURLY var_decl* statement* RCURLY;
 

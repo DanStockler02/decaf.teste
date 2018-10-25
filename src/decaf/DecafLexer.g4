@@ -21,7 +21,7 @@ CLLT : 'callout';
 EL : 'else';
 INT : 'int';
 RTN : 'return';
-VD : 'void';
+VOID : 'void';
 FR : 'for';
 BRK : 'break';
 CNT : 'continue';

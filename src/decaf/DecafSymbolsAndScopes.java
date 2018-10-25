@@ -52,9 +52,11 @@ public class DecafSymbolsAndScopes extends DecafParserBaseListener {
 
     @Override
     public void enterBlock(DecafParser.BlockContext ctx) {
-        LocalScope l = new LocalScope(currentScope);
-        saveScope(ctx, currentScope);
-        // pushScope(l);
+        
+            LocalScope l = new LocalScope(currentScope);
+            saveScope(ctx, currentScope);
+             pushScope(l);
+         
     }
 
     @Override
@@ -107,7 +109,36 @@ public class DecafSymbolsAndScopes extends DecafParserBaseListener {
         }
     }
 
+
+    @Override public void enterVar_decl(DecafParser.Var_declContext ctx) { 
     
+        try {
+            defineVar(ctx.type(), ctx.ID().getSymbol());
+        } catch (Exception e) {
+            this.error(ctx.ID().getSymbol(), "Variaveis duplicadas" );
+        }
+              
+    }
+
+    @Override public void exitVar_decl(DecafParser.Var_declContext ctx) { 
+        
+        try {
+            String name = ctx.ID().getSymbol().getText();
+            Symbol var = currentScope.resolve(name);
+                if ( var == null ) {
+                    this.error(ctx.ID().getSymbol(), "no such variable: " + name);
+                }
+                if ( var instanceof FunctionSymbol ) {
+                    this.error(ctx.ID().getSymbol(), name + " is not a variable");
+                }
+        } catch (Exception e) {
+            this.error(ctx.ID().getSymbol(), "no such variable: " + e);
+        }
+      
+      
+    }
+
+
     /**
      * Método que atuliza o escopo para o atual e imprime o valor
      *
