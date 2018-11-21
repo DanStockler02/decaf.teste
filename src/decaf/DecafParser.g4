@@ -21,7 +21,7 @@ method_decl: (type | VOID)  ID LPARENT (ra (VIRGULA ra )* )? RPARENT block;
 
 block: LCURLY var_decl* statement* RCURLY;
 
-var_decl: type ID(vir)* PONTOVIR;
+var_decl: type ID (vir)* PONTOVIR;
 
 vir: VIRGULA ID;
 
